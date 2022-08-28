@@ -1,3 +1,3 @@
-class ResourceImage {
-  static String AssetsPrefix  = "assets/images/";
+class ResourceImages {
+  static const String AssetsPrefix  = "assets/images/";
 }

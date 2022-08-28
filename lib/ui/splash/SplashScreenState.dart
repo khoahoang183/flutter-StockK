@@ -20,13 +20,11 @@ class SplashScreenState extends State<SplashScreenUI> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: ResourceString.splash_screen_title,
-      home: Scaffold(
+    return Scaffold(
         body: Container(
             width: double.infinity,
             height: double.infinity,
-            color: hexToColor(ResourceColor.color_bg_yellow_main),
+            color: hexToColor(ResourceColors.color_green_main),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,23 +32,13 @@ class SplashScreenState extends State<SplashScreenUI> {
                 // Img Logo
                 InkWell(
                     onTap: Event_onTap_imgLogo,
-                    child: Image.asset("${ResourceImage.AssetsPrefix}ic_logo.png",
-                      width: 150,
-                      height: 150,)
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                  child: const Text(ResourceString.splash_screen_welcome,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18)),
+                    child: Image.asset("${ResourceImages.AssetsPrefix}img_logo_gray.png",
+                      width: 120,
+                      height: 120,)
                 ),
               ],
             )),
-      ),
-    );
+      );
   }
 
   // ignore: non_constant_identifier_names
