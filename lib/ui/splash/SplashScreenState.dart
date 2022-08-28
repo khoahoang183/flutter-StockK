@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceImage.dart';
+import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/ui/home/HomeScreenUI.dart';
 import 'SplashScreenUI.dart';
 
 class SplashScreenState extends State<SplashScreenUI> {
-  final screenTitle = "Splash Screen";
-  final screenContent = "Welcome to Splashscreen";
-
   SplashScreenState();
 
   @override
@@ -23,7 +21,7 @@ class SplashScreenState extends State<SplashScreenUI> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: screenTitle,
+      title: ResourceString.splash_screen_title,
       home: Scaffold(
         body: Container(
             width: double.infinity,
@@ -42,9 +40,9 @@ class SplashScreenState extends State<SplashScreenUI> {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-                  child: Text(screenContent,
+                  child: const Text(ResourceString.splash_screen_welcome,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic,
                           fontSize: 18)),
