@@ -54,7 +54,7 @@ class HomeProductGroupListTitle extends StatelessWidget {
               ],
             ),
             SizedBox(
-                height: 200,
+                height: 250,
                 child: ListView.builder(
                     physics: const ClampingScrollPhysics(),
                     shrinkWrap: true,
@@ -76,56 +76,58 @@ class HomeProductChildListTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-      decoration: BoxDecoration(
-          color: hexToColor(ResourceColors.color_white),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 1, blurRadius: 5 // changes position of shadow
-                ),
-          ],
-          border: Border.all(color: hexToColor(ResourceColors.color_text_gray_2))),
-      child: Expanded(
-          child: SizedBox(
-        width: 120,
-        child: Column(
-          children: [
-            Image.asset(
-              "${ResourceImages.AssetsPrefix}img_sneaker_yeezy.png",
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-              scale: 0.5,
-            ),
-            Expanded(
-                child: Text(
-              model.name,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: ResourceDimens.text_size_12, fontWeight: FontWeight.bold),
-            )),
-            Text(
-              "Lowest ask",
-              overflow: TextOverflow.ellipsis,
-              style:
-                  TextStyle(fontSize: ResourceDimens.text_size_12, color: hexToColor(ResourceColors.color_text_gray_2)),
-            ),
-            const Text(
-              "\$199.0",
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: ResourceDimens.text_size_18, fontWeight: FontWeight.bold),
-            ),
-            Container(
-                color: hexToColor(ResourceColors.color_text_gray_2),
-                padding: const EdgeInsets.all(5),
-                child: const Text(
-                  "100 SOLD",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: ResourceDimens.text_size_12),
-                ))
-          ],
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
+        decoration: BoxDecoration(
+            color: hexToColor(ResourceColors.color_white),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5), spreadRadius: 1, blurRadius: 5 // changes position of shadow
+                  ),
+            ],
+            border: Border.all(color: hexToColor(ResourceColors.color_text_gray_2))),
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          width: 120,
+          child: Column(
+            children: [
+              Image.asset(
+                "${ResourceImages.AssetsPrefix}img_sneaker_yeezy.png",
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+                scale: 0.5,
+              ),
+              Text(
+                model.name,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: ResourceDimens.text_size_12, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "Lowest ask",
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontSize: ResourceDimens.text_size_12, color: hexToColor(ResourceColors.color_text_gray_2)),
+              ),
+              const Text(
+                "\$199.0",
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: ResourceDimens.text_size_18, fontWeight: FontWeight.bold),
+              ),
+              Container(
+                  color: hexToColor(ResourceColors.color_text_gray_2),
+                  padding: const EdgeInsets.all(5),
+                  child: const Text(
+                    "100 SOLD",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: ResourceDimens.text_size_12),
+                  ))
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
