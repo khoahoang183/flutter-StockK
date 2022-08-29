@@ -21,7 +21,7 @@ class ProductModel {
 
   List<ProductModel> getDummyList() {
     List<ProductModel> result = <ProductModel>[];
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 5; i++) {
       result.add(ProductModel.withAll(
           "product $i", "urlImage", "urlDetail", "releaseDate", "description", "condition", 100, 100, 100));
     }

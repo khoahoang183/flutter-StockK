@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductModel.dart';
 
-import '../../resources/ResourceImage.dart';
+import '../../../resources/ResourceImage.dart';
 
 class HomeCategoryListTitle extends StatelessWidget {
   final ProductModel model;

@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+class ResourceThemes {
 
 
-class ResourceTheme
+}
