@@ -1,9 +1,8 @@
 // ignore: file_names
 import 'dart:core';
-import 'dart:ffi';
-import 'package:flutter/material.dart';
+import 'package:stockk_flutter/base/BaseModel.dart';
 
-class ProductModel {
+class ProductModel extends BaseModel {
   String name = "";
   String urlImage = "";
   String urlDetail = "";
@@ -16,14 +15,23 @@ class ProductModel {
 
   ProductModel();
 
-  ProductModel.withAll(this.name, this.urlImage, this.urlDetail, this.releaseDate, this.description, this.condition, this.price,
-      this.sellPrice, this.soldCount);
+  ProductModel.withAllParams(this.name, this.urlImage, this.urlDetail, this.releaseDate, this.description,
+      this.condition, this.price, this.sellPrice, this.soldCount);
 
-  List<ProductModel> getDummyList() {
+  @override
+  List<ProductModel> createDummyData() {
     List<ProductModel> result = <ProductModel>[];
-    for (var i = 0; i < 5; i++) {
-      result.add(ProductModel.withAll(
-          "product $i", "urlImage", "urlDetail", "releaseDate", "description", "condition", 100, 100, 100));
+    for (var i = 0; i < 10; i++) {
+      result.add(ProductModel.withAllParams(
+          "product $i",
+          "https://media4.giphy.com/media/WoF3yfYupTt8mHc7va/200w.gif",
+          "urlDetail",
+          "releaseDate",
+          "description",
+          "condition",
+          100 * i.toDouble(),
+          100 * i.toDouble(),
+          100 * i.toDouble()));
     }
     return result;
   }

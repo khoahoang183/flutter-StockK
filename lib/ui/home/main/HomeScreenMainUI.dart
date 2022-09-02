@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:stockk_flutter/model/ProductCategoryModel.dart';
+import 'package:stockk_flutter/model/ProductGroupModel.dart';
+import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/ui/home/main/HomeProductGroupListTitle.dart';
-
-import '../../../model/ProductModel.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../resources/ResourceStrings.dart';
 import '../../../util/view/system/SysAppBar.dart';
+import '../../../util/view/system/SysRefreshIndicator.dart';
 import 'HomeProductListTitle.dart';
 
 // UI StatefulWidget
@@ -32,7 +34,8 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     Image.asset("${ResourceImages.AssetsPrefix}img_home_ads_3.png", fit: BoxFit.cover),
   ];
 
-  final List<ProductModel> _lstProduct = ProductModel().getDummyList();
+  final List<ProductCategoryModel> _lstCategory = ProductCategoryModel().createDummyData();
+  final List<ProductGroupModel> _lstGroupProduct = ProductGroupModel().createDummyData();
 
   @override
   void initState() {
@@ -57,24 +60,26 @@ class HomeScreenState extends State<HomeScreenMainUI> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: SysAppBar(),
-        body: RefreshIndicator(
+        body: SysRefreshIndicator(
             onRefresh: () async {},
             child: SingleChildScrollView(
-                child: Column(
-              children: [
-                // PageView top ads
-                SizedBox(
-                  height: 300,
-                  width: double.infinity,
-                  child: PageView(controller: _pageController, children: _lstPageView),
-                ),
-                buildProductCategoryWidget(),
-                buildProductGroupWidget()
-              ],
-            ))));
+                child: Container(
+                    color: hexToColor(ResourceColors.color_white),
+                    child: Column(
+                      children: [
+                        // PageView top ads
+                        SizedBox(
+                          height: 300,
+                          width: double.infinity,
+                          child: PageView(controller: _pageController, children: _lstPageView),
+                        ),
+                        buildProductCategoryWidget(),
+                        buildProductGroupWidget()
+                      ],
+                    )))));
   }
 
-  // buildCategoryWidget
+  /// buildCategoryWidget
   Widget buildProductCategoryWidget() {
     return // Content
         Padding(
@@ -99,16 +104,16 @@ class HomeScreenState extends State<HomeScreenMainUI> {
                           physics: const ClampingScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: _lstProduct.length,
+                          itemCount: _lstCategory.length,
                           itemBuilder: (context, index) {
-                            return HomeCategoryListTitle(model: _lstProduct[index]);
+                            return HomeCategoryListTitle(model: _lstCategory[index]);
                           }),
                     )
                   ],
                 )));
   }
 
-  // buildCategoryWidget
+  /// buildCategoryWidget
   Widget buildProductGroupWidget() {
     return // Content
         Padding(
@@ -118,9 +123,9 @@ class HomeScreenState extends State<HomeScreenMainUI> {
               child: ListView.builder(
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: _lstProduct.length,
+                  itemCount: _lstGroupProduct.length,
                   itemBuilder: (context, index) {
-                    return HomeProductGroupListTitle(model: _lstProduct[index]);
+                    return HomeProductGroupListTitle(model: _lstGroupProduct[index]);
                   }),
             ));
   }

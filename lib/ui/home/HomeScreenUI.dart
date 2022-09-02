@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
+import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/ui/home/main/HomeScreenMainUI.dart';
 import 'package:stockk_flutter/ui/home/HomeScreenNotiUI.dart';
-import 'package:stockk_flutter/ui/home/HomeScreenSearchUI.dart';
+import 'package:stockk_flutter/ui/home/search/HomeScreenSearchUI.dart';
 
 import '../../resources/ResourceImage.dart';
 import '../../util/view/system/SysAppBar.dart';
-import 'HomeScreenUserUI.dart';
+import 'user/HomeScreenUserUI.dart';
 
 // UI StatefulWidget
 class HomeScreenUI extends StatefulWidget {
@@ -33,19 +34,54 @@ class HomeScreenState extends State<HomeScreenUI> {
 
   static final List<BottomNavigationBarItem> _lstBottomNavigationBarItem = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Image.asset(width: 20, height: 20, "${ResourceImages.AssetsPrefix}icon_home_search.png"),
+      icon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_increase.png",
+          color: hexToColor(ResourceColors.color_text_gray_6)),
+      activeIcon: Image.asset(
+        width: ResourceDimens.view_height_20,
+        height: ResourceDimens.view_height_20,
+        "${ResourceImages.AssetsPrefix}icon_home_increase.png",
+        color: hexToColor(ResourceColors.color_green_main),
+      ),
       label: ResourceStrings.home_screen_navigate_home,
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(width: 20, height: 20, "${ResourceImages.AssetsPrefix}icon_home_search.png"),
+      icon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_search.png"),
+      activeIcon: Image.asset(
+        width: ResourceDimens.view_height_20,
+        height: ResourceDimens.view_height_20,
+        "${ResourceImages.AssetsPrefix}icon_home_search.png",
+        color: hexToColor(ResourceColors.color_green_main),
+      ),
       label: ResourceStrings.home_screen_navigate_search,
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(width: 20, height: 20, "${ResourceImages.AssetsPrefix}icon_home_noti.png"),
+      icon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_noti.png"),
+      activeIcon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_noti.png",
+          color: hexToColor(ResourceColors.color_green_main)),
       label: ResourceStrings.home_screen_navigate_noti,
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(width: 20, height: 20, "${ResourceImages.AssetsPrefix}icon_home_user.png"),
+      icon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_user.png"),
+      activeIcon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          "${ResourceImages.AssetsPrefix}icon_home_user.png",
+          color: hexToColor(ResourceColors.color_green_main)),
       label: ResourceStrings.home_screen_navigate_user,
     )
   ];
@@ -57,22 +93,31 @@ class HomeScreenState extends State<HomeScreenUI> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SysAppBar(),
-      body: Center(
-        child: _lstPageUI.elementAt(_currentSelectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentSelectedIndex,
-        selectedItemColor: hexToColor(ResourceColors.color_green_main),
-        unselectedItemColor: hexToColor(ResourceColors.color_bg_gray_select_1),
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        onTap: _onTapBottomNavigationBar,
-        items: _lstBottomNavigationBarItem,
-      ),
-    );
+    return WillPopScope(
+        onWillPop: () async {
+          // disable back
+          if (Navigator.of(context).userGestureInProgress) {
+            return false;
+          } else {
+            return true;
+          }
+        },
+        child: Scaffold(
+          appBar: SysAppBar(),
+          body: Center(
+            child: _lstPageUI.elementAt(_currentSelectedIndex),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentSelectedIndex,
+            selectedItemColor: hexToColor(ResourceColors.color_green_main),
+            unselectedItemColor: hexToColor(ResourceColors.color_bg_gray_select_1),
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            type: BottomNavigationBarType.fixed,
+            onTap: _onTapBottomNavigationBar,
+            items: _lstBottomNavigationBarItem,
+          ),
+        ));
   }
 
   void _onTapBottomNavigationBar(int index) {
