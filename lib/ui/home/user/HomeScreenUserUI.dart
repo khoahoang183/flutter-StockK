@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stockk_flutter/ui/faq/FAQScreenUI.dart';
+import 'package:stockk_flutter/util/view/custom/CusTopBarWidget.dart';
 
 import '../../../resources/ResourceColors.dart';
 import '../../../resources/ResourceDimens.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../resources/ResourceStrings.dart';
+import '../../../util/view/custom/CusDividerLine.dart';
 
 // UI StatefulWidget
 class HomeScreenUserUI extends StatefulWidget {
@@ -24,44 +27,20 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
     return Container(
         color: Colors.white,
         child: Column(
-          children: [buildTopBarWidget(), buildLoginWidget()],
+          children: [buildTopBarWidget(), CusDividerLine(), buildLoginWidget()],
         ));
   }
 
   /// buildTopBarWidget
   Widget buildTopBarWidget() {
-    return SizedBox(
-      width: double.infinity,
-      height: ResourceDimens.view_toolbar_height,
-      child: Center(
-          child: Column(children: [
-        Row(
-          children: [
-            GestureDetector(
-              onTap: onTapImageFAQ,
-              child: Padding(
-                  padding: const EdgeInsets.all(ResourceDimens.padding_20),
-                  child: Image.asset(
-                      width: ResourceDimens.view_height_20,
-                      height: ResourceDimens.view_height_20,
-                      "${ResourceImages.AssetsPrefix}icon_home_filter.png")),
-            ),
-            const Expanded(
-                child: Text(ResourceStrings.home_screen_account_title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: ResourceDimens.text_size_18,
-                      fontWeight: FontWeight.bold,
-                    ))),
-            const SizedBox(
-              width: ResourceDimens.view_height_20,
-              height: ResourceDimens.view_height_20,
-            ),
-          ],
-        ),
-        Divider(color: hexToColor(ResourceColors.color_text_gray_2))
-      ])),
-    );
+    return CusTopBarWidget(
+        titleString: ResourceStrings.home_screen_account_title,
+        urlLeftImage: "${ResourceImages.AssetsPrefix}icon_home_filter.png",
+        urlRightImage: "${ResourceImages.AssetsPrefix}icon_home_filter.png",
+        // ignore: void_checks
+        onTapLeftImageCallback: onTapImageFAQ,
+        // ignore: void_checks
+        onTapRightImageCallback: onTapImageFAQ);
   }
 
   /// buildLoginWidget
@@ -75,11 +54,14 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
             height: ResourceDimens.view_height_120,
             fit: BoxFit.cover,
             "${ResourceImages.AssetsPrefix}img_logo_2.png"),
-        Text("ewq")
+        const Text("ewq")
       ],
     );
   }
 
   /// onTapImageFAQ
-  void onTapImageFAQ() {}
+  void onTapImageFAQ() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const FAQScreenUI()));
+  }
 }

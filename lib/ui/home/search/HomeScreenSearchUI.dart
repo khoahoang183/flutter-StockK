@@ -6,6 +6,7 @@ import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/util/view/system/SysRefreshIndicator.dart';
 
 import '../../../resources/ResourceImage.dart';
+import '../../../util/view/custom/CusDividerLine.dart';
 import 'HomeSearchProductListTitle.dart';
 
 /// UI StatefulWidget
@@ -29,44 +30,46 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
     return Container(
         color: Colors.white,
         child: Column(
-          children: [buildSearchWidget(), buildListGridSearch()],
+          children: [
+            buildSearchWidget(),
+            CusDividerLine(),
+            buildListGridSearch()
+          ],
         ));
   }
 
   /// buildSearchWidget
   Widget buildSearchWidget() {
-    return SizedBox(
+    return Container(
+      alignment: Alignment.center,
       width: double.infinity,
       height: ResourceDimens.view_toolbar_height,
-      child: Center(
-          child: Column(children: [
-        Row(
-          children: [
-            Padding(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+              padding: const EdgeInsets.all(ResourceDimens.padding_20),
+              child: Image.asset(
+                  width: ResourceDimens.view_height_20,
+                  height: ResourceDimens.view_height_20,
+                  "${ResourceImages.AssetsPrefix}icon_home_loupe.png")),
+          const Expanded(
+            child: TextField(
+                decoration: InputDecoration.collapsed(
+              hintText: ResourceStrings.home_screen_search_hint,
+            )),
+          ),
+          GestureDetector(
+            onTap: onTapImageSearch,
+            child: Padding(
                 padding: const EdgeInsets.all(ResourceDimens.padding_20),
                 child: Image.asset(
                     width: ResourceDimens.view_height_20,
                     height: ResourceDimens.view_height_20,
-                    "${ResourceImages.AssetsPrefix}icon_home_loupe.png")),
-            const Expanded(
-              child: TextField(
-                  decoration: InputDecoration.collapsed(
-                hintText: ResourceStrings.home_screen_search_hint,
-              )),
-            ),
-            GestureDetector(
-              onTap: onTapImageSearch,
-              child: Padding(
-                  padding: const EdgeInsets.all(ResourceDimens.padding_20),
-                  child: Image.asset(
-                      width: ResourceDimens.view_height_20,
-                      height: ResourceDimens.view_height_20,
-                      "${ResourceImages.AssetsPrefix}icon_home_filter.png")),
-            ),
-          ],
-        ),
-        Divider(color: hexToColor(ResourceColors.color_text_gray_2))
-      ])),
+                    "${ResourceImages.AssetsPrefix}icon_home_filter.png")),
+          ),
+        ],
+      ),
     );
   }
 

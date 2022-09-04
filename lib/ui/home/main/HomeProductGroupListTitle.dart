@@ -9,7 +9,7 @@ import '../../../resources/ResourceImage.dart';
 
 class HomeProductGroupListTitle extends StatelessWidget {
   final ProductGroupModel model;
-  final double childListHeight = 250;
+  final double childListHeight = 270;
 
   // ignore: use_key_in_widget_constructors
   const HomeProductGroupListTitle({Key? key, required this.model});
@@ -55,16 +55,15 @@ class HomeProductGroupListTitle extends StatelessWidget {
                     ))
               ],
             ),
-            SizedBox(
-                height: childListHeight,
-                child: ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: model.childList.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return HomeProductChildListTitle(model: model.childList[index]);
-                    }))
+            Container(
+              height: childListHeight,
+              child: ListView.builder(
+                  itemCount: model.childList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return HomeProductChildListTitle(model: model.childList[index]);
+                  }),
+            )
           ],
         ));
   }
