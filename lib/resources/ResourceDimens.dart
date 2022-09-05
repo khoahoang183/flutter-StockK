@@ -14,6 +14,7 @@ class ResourceDimens {
   static const double margin_5 = 5;
   static const double margin_10 = 10;
   static const double margin_15 = 15;
+  static const double margin_20 = 20;
 
   static const double padding_0 = 0;
   static const double padding_5 = 5;
@@ -24,6 +25,7 @@ class ResourceDimens {
 
   /// View Size
   static const double view_toolbar_height = 70;
+  static const double view_divider_height = 5;
 
   static const double view_height_10 = 10;
   static const double view_height_20 = 20;

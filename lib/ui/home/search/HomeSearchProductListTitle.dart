@@ -13,7 +13,8 @@ class HomeSearchProductListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
+      margin: const EdgeInsets.fromLTRB(
+          ResourceDimens.margin_0, ResourceDimens.margin_5, ResourceDimens.margin_10, ResourceDimens.margin_5),
       decoration: BoxDecoration(
           color: hexToColor(ResourceColors.color_white),
           borderRadius: BorderRadius.circular(5),
@@ -56,19 +57,14 @@ class HomeSearchProductListTitle extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        height: 2,
-                        fontSize: ResourceDimens.text_size_12,
-                        color: hexToColor(ResourceColors.color_text_gray_2)),
+                        fontSize: ResourceDimens.text_size_12, color: hexToColor(ResourceColors.color_text_gray_2)),
                   )),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(ResourceDimens.padding_0, ResourceDimens.padding_0,
-                      ResourceDimens.padding_0, ResourceDimens.padding_10),
-                  child: Text(
-                    "\$${model.price}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: ResourceDimens.text_size_18, fontWeight: FontWeight.bold),
-                  )),
+              Text(
+                "\$${model.price}",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: ResourceDimens.text_size_18, fontWeight: FontWeight.bold),
+              ),
             ],
           )),
     );
