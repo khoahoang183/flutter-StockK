@@ -8,4 +8,10 @@ abstract class BaseModel {
   /// Function to implement dummy data when API not implemented yet
   List<dynamic> createDummyData();
 
+  /// Function to implement dummy data when API not implemented yet
+  Map<String,dynamic> toJson(){
+    return {
+      "id": id,
+    };
+  }
 }
