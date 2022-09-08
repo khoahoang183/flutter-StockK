@@ -1,3 +1,5 @@
+import 'package:stockk_flutter/model/ProductCategoryModel.dart';
+
 class BaseResponseModel<T> {
   late T data;
   late int status; // default is 200
@@ -12,10 +14,24 @@ class BaseResponseModel<T> {
   }
 
   factory BaseResponseModel.fromJson(Map<String, dynamic> json) {
-    return BaseResponseModel.withAllParams(
-      json["data"],
-      json["status"],
-      json["message"],
-    );
+    if (T is List) {
+      List<ProductCategoryModel> lst =
+          (json["data"] as List).map((item) => ProductCategoryModel.fromJson(item)).toList();
+
+      return BaseResponseModel.withAllParams(
+        json["data"],
+        json["status"],
+        json["message"],
+      );
+    } else {
+      List<ProductCategoryModel> lst =
+          (json["data"] as List).map((item) => ProductCategoryModel.fromJson(item)).toList();
+
+      return BaseResponseModel.withAllParams(
+        json["data"],
+        json["status"],
+        json["message"],
+      );
+    }
   }
 }

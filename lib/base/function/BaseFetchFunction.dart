@@ -9,8 +9,9 @@ Future<T?> fetchData<T>(String url) async {
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     /// Call API success
-    return BaseResponseModel<T>.fromJson(jsonDecode(response.body)).data;
+    BaseResponseModel<T> responseModel = BaseResponseModel<T>.fromJson(jsonDecode(response.body));
 
+    return responseModel.data;
   } else {
     /// Call API failed
     return null;
