@@ -1,6 +1,6 @@
 // ignore: file_names
 import 'dart:core';
-import 'package:stockk_flutter/base/BaseModel.dart';
+import 'package:stockk_flutter/base/model/BaseModel.dart';
 
 class ProductModel extends BaseModel {
   String name = "";
@@ -38,5 +38,11 @@ class ProductModel extends BaseModel {
 
   bool isTest(String value) {
     return value == 'Test';
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 }

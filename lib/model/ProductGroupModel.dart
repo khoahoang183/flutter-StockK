@@ -1,4 +1,4 @@
-import 'package:stockk_flutter/base/BaseModel.dart';
+import 'package:stockk_flutter/base/model/BaseModel.dart';
 import 'package:stockk_flutter/model/ProductModel.dart';
 
 class ProductGroupModel extends BaseModel {
@@ -19,5 +19,11 @@ class ProductGroupModel extends BaseModel {
       ProductGroupModel.withAllParams("Popular Electronics", ProductModel().createDummyData()),
       ProductGroupModel.withAllParams("Featured Trading Cards", ProductModel().createDummyData())
     ];
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    // TODO: implement toJson
+    throw UnimplementedError();
   }
 }

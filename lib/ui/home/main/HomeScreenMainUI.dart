@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
@@ -6,11 +7,15 @@ import 'package:stockk_flutter/model/ProductGroupModel.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/ui/home/main/HomeProductGroupListTitle.dart';
+
+import '../../../base/function/BaseFetchFunction.dart';
+import '../../../base/model/BaseResponseModel.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../resources/ResourceStrings.dart';
 import '../../../util/view/system/SysAppBar.dart';
 import '../../../util/view/system/SysRefreshIndicator.dart';
 import 'HomeProductListTitle.dart';
+import 'package:http/http.dart' as http;
 
 // UI StatefulWidget
 class HomeScreenMainUI extends StatefulWidget {
@@ -34,12 +39,18 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     Image.asset("${ResourceImages.AssetsPrefix}img_home_ads_3.png", fit: BoxFit.cover),
   ];
 
-  final List<ProductCategoryModel> _lstCategory = ProductCategoryModel().createDummyData();
+  late Future<List<ProductCategoryModel>> _lstCategory;
+  late Future<List<BaseResponseModel>> model;
   final List<ProductGroupModel> _lstGroupProduct = ProductGroupModel().createDummyData();
+
 
   @override
   void initState() {
     super.initState();
+
+    // fetch _lstCategory
+    model = fetchData("https://3f9675a4-47b4-4bf3-9a25-94f1fdf92d3b.mock.pstmn.io/productCategory") as Future<List<BaseResponseModel>>;
+
 
     // Handle State of PageView ads
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {
@@ -98,7 +109,7 @@ class HomeScreenState extends State<HomeScreenMainUI> {
                             style: TextStyle(fontSize: ResourceDimens.text_size_18, fontWeight: FontWeight.bold),
                           )),
                     ),
-                    SizedBox(
+                    /*SizedBox(
                       height: 120,
                       child: ListView.builder(
                           physics: const ClampingScrollPhysics(),
@@ -108,7 +119,7 @@ class HomeScreenState extends State<HomeScreenMainUI> {
                           itemBuilder: (context, index) {
                             return HomeCategoryListTitle(model: _lstCategory[index]);
                           }),
-                    )
+                    )*/
                   ],
                 )));
   }

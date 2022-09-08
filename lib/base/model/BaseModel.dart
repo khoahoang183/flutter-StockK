@@ -5,13 +5,20 @@ abstract class BaseModel {
   /// Base constructor
   BaseModel();
 
+  BaseModel.withAllParams(this.id);
+
   /// Function to implement dummy data when API not implemented yet
   List<dynamic> createDummyData();
 
-  /// Function to implement dummy data when API not implemented yet
-  Map<String,dynamic> toJson(){
+  /// Function parse object to Json
+  Map<String, dynamic> toJson() {
     return {
       "id": id,
     };
   }
+
+/*  /// Function parse Json to object
+  factory fromJson(Map<String, dynamic> json){
+    return BaseModel(0)
+  }*/
 }
