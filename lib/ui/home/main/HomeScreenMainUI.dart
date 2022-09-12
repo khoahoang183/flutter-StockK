@@ -46,7 +46,7 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     super.initState();
 
     // fetch _lstCategory
-    _lstCategory = fetchData<List<ProductCategoryModel>>(
+    _lstCategory = fetchDataList<List<ProductCategoryModel>>(
         "https://3f9675a4-47b4-4bf3-9a25-94f1fdf92d3b.mock.pstmn.io/productCategory");
 
     // Handle State of PageView ads

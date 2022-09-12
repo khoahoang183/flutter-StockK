@@ -30,6 +30,7 @@ class ProductCategoryModel extends BaseModel {
       "title": title,
     });
 
+  @override
   factory ProductCategoryModel.fromJson(Map<String, dynamic> json) {
     return ProductCategoryModel.withAllParams(
       json["id"],

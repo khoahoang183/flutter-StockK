@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductModel.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
@@ -102,6 +104,8 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
   void onTapImageSearch() {
     setState(() {
       _lstProductSearch = ProductModel().createDummyData();
+
+      String json = jsonEncode(_lstProductSearch.map((e) => e.toJson()).toList());
     });
   }
 

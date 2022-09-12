@@ -17,8 +17,7 @@ abstract class BaseModel {
     };
   }
 
-/*  /// Function parse Json to object
-  factory fromJson(Map<String, dynamic> json){
-    return BaseModel(0)
-  }*/
+  /// Function parse Json to object
+  fromJson(Map<String, dynamic> json){
+  }
 }

@@ -31,7 +31,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
           children: [
             CusTopBarWidget(
               titleString: ResourceStrings.home_screen_account_title,
-              urlLeftImage: "${ResourceImages.AssetsPrefix}icon_home_filter.png",
+              urlLeftImage: "${ResourceImages.AssetsPrefix}icon_home_question.png",
               urlRightImage: "${ResourceImages.AssetsPrefix}icon_home_filter.png",
               // ignore: void_checks
               onTapLeftImageCallback: onTapImageFAQ,
