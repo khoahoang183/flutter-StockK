@@ -1,9 +1,10 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart';
 import 'package:stockk_flutter/base/model/BaseModel.dart';
-import 'package:stockk_flutter/model/ProductCategoryModel.dart';
 
 class BaseResponseModel<T> {
-
   late T result;
   late int status; // default is 200
   late String message;
@@ -18,15 +19,9 @@ class BaseResponseModel<T> {
 
   BaseResponseModel fromJson(Map<String, dynamic> json) {
     //List lst = (json["result"] as List).map((item) => BaseModel.fromJson(item)).toList();
-    return BaseResponseModel<T>.withAllParams(
+    return BaseResponseModel.withAllParams(
       json["status"],
       json["message"],
     );
   }
-
-
-
-
-
-
 }

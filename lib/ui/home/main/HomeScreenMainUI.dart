@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
 import 'package:stockk_flutter/model/ProductGroupModel.dart';
+import 'package:stockk_flutter/network/response/ProductCategoriesResponse.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/ui/home/main/HomeProductGroupListTitle.dart';
@@ -46,8 +47,8 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     super.initState();
 
     // fetch _lstCategory
-    _lstCategory = fetchDataList<List<ProductCategoryModel>>(
-        "https://3f9675a4-47b4-4bf3-9a25-94f1fdf92d3b.mock.pstmn.io/productCategory");
+    _lstCategory = fetchDataList<ProductCategoriesResponse>(
+            "https://3f9675a4-47b4-4bf3-9a25-94f1fdf92d3b.mock.pstmn.io/productCategory");
 
     // Handle State of PageView ads
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {

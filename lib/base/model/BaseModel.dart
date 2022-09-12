@@ -1,5 +1,5 @@
 // ignore: file_names
-abstract class BaseModel {
+class BaseModel {
   int id = -1;
 
   /// Base constructor
@@ -8,7 +8,9 @@ abstract class BaseModel {
   BaseModel.withAllParams(this.id);
 
   /// Function to implement dummy data when API not implemented yet
-  List<dynamic> createDummyData();
+  List<dynamic> createDummyData() {
+    return [];
+  }
 
   /// Function parse object to Json
   Map<String, dynamic> toJson() {
@@ -18,6 +20,7 @@ abstract class BaseModel {
   }
 
   /// Function parse Json to object
-  fromJson(Map<String, dynamic> json){
+  factory BaseModel.fromJson(Map<String, dynamic> json){
+    return BaseModel();
   }
 }
