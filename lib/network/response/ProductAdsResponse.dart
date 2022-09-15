@@ -2,31 +2,32 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:stockk_flutter/base/model/BaseResponseModel.dart';
+import 'package:stockk_flutter/model/ProductAdsModel.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
 import 'package:stockk_flutter/util/helper/LogHelper.dart';
 
 import '../../const/ApplicationConst.dart';
 import '../../const/NetworkConst.dart';
 
-class ProductCategoriesResponse extends BaseResponseModel<List<ProductCategoryModel>> {
+class ProductAdsResponse extends BaseResponseModel<List<ProductAdsModel>> {
 
   @override
-  ProductCategoriesResponse(): super();
+  ProductAdsResponse(): super();
 
   @override
-  ProductCategoriesResponse.withAllParams(result, status, message) : super.withAllParams(result, status, message);
+  ProductAdsResponse.withAllParams(result, status, message) : super.withAllParams(result, status, message);
 
   @override
   BaseResponseModel fromJson(Map<String, dynamic> json) {
-    return ProductCategoriesResponse.withAllParams(
-      (json["result"] as List).map((item) => ProductCategoryModel.fromJson(item)).toList(),
+    return ProductAdsResponse.withAllParams(
+      (json["result"] as List).map((item) => ProductAdsModel.fromJson(item)).toList(),
       json["status"],
       json["message"],
     );
   }
 
   @override
-  Future<List<ProductCategoryModel>> fetchData({url = "$BASE_URL/productCategories"}) async {
+  Future<List<ProductAdsModel>> fetchData({url = "$BASE_URL/productAds"}) async {
     try {
       final httpResponse = await http.get(Uri.parse(url));
       if (httpResponse.statusCode == NETWORK_STATUS_SUCCESS) {

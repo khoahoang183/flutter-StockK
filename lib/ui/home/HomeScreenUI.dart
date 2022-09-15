@@ -3,7 +3,7 @@ import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/ui/home/main/HomeScreenMainUI.dart';
-import 'package:stockk_flutter/ui/home/HomeScreenNotiUI.dart';
+import 'package:stockk_flutter/ui/home/noti/HomeScreenNotiUI.dart';
 import 'package:stockk_flutter/ui/home/search/HomeScreenSearchUI.dart';
 
 import '../../resources/ResourceImage.dart';

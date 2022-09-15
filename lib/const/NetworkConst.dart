@@ -1,0 +1,2 @@
+
+const int NETWORK_STATUS_SUCCESS = 200;

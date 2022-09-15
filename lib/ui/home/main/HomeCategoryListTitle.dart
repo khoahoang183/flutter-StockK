@@ -18,6 +18,7 @@ class HomeCategoryListTitle extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
                 model.urlImage,
+                filterQuality: FilterQuality.medium,
                 fit: BoxFit.cover,
                 scale: 0.1,
               ))),

@@ -1,20 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:stockk_flutter/model/ProductAdsModel.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
 import 'package:stockk_flutter/model/ProductGroupModel.dart';
+import 'package:stockk_flutter/network/response/ProductAdsResponse.dart';
 import 'package:stockk_flutter/network/response/ProductCategoriesResponse.dart';
+import 'package:stockk_flutter/network/response/ProductGroupModelsResponse.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/ui/home/main/HomeProductGroupListTitle.dart';
 
-import '../../../base/function/BaseFetchFunction.dart';
-import '../../../base/model/BaseResponseModel.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../resources/ResourceStrings.dart';
 import '../../../util/view/system/SysAppBar.dart';
 import '../../../util/view/system/SysRefreshIndicator.dart';
-import 'HomeProductListTitle.dart';
+import 'HomeCategoryListTitle.dart';
 
 // UI StatefulWidget
 class HomeScreenMainUI extends StatefulWidget {
@@ -38,31 +39,18 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     Image.asset("${ResourceImages.AssetsPrefix}img_home_ads_3.png", fit: BoxFit.cover),
   ];
 
-  late Future<List<ProductCategoryModel>?> _lstCategory;
-  late Future<List<BaseResponseModel>> model;
-  final List<ProductGroupModel> _lstGroupProduct = ProductGroupModel().createDummyData();
+  late Future<List<ProductAdsModel>> _lstAds;
+  late Future<List<ProductCategoryModel>> _lstCategory;
+  late Future<List<ProductGroupModel>> _lstGroupProduct;
+  late String _title;
 
   @override
   void initState() {
     super.initState();
 
-    // fetch _lstCategory
-    _lstCategory = fetchDataList<ProductCategoriesResponse>(
-            "https://3f9675a4-47b4-4bf3-9a25-94f1fdf92d3b.mock.pstmn.io/productCategory");
+    initializeData();
 
-    // Handle State of PageView ads
-    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-      if (_currentPage == _lstPageView.length - 1) {
-        _currentPage = 0;
-      } else {
-        _currentPage++;
-      }
-      _pageController.animateToPage(
-        _currentPage,
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.easeIn,
-      );
-    });
+    initializeView();
   }
 
   @override
@@ -70,22 +58,45 @@ class HomeScreenState extends State<HomeScreenMainUI> {
     return Scaffold(
         appBar: SysAppBar(),
         body: SysRefreshIndicator(
-            onRefresh: () async {},
+            onRefresh: () async {
+              initializeData();
+            },
             child: SingleChildScrollView(
                 child: Container(
                     color: hexToColor(ResourceColors.color_white),
                     child: Column(
                       children: [
                         // PageView top ads
-                        SizedBox(
-                          height: 300,
-                          width: double.infinity,
-                          child: PageView(controller: _pageController, children: _lstPageView),
-                        ),
+                        buildProductAdsWidget(),
                         buildProductCategoryWidget(),
                         buildProductGroupWidget()
                       ],
                     )))));
+  }
+
+  /// buildProductAdsWidget
+  Widget buildProductAdsWidget() {
+    return SizedBox(
+        height: 300,
+        width: double.infinity,
+        child: FutureBuilder(
+            future: _lstAds,
+            builder: (context, AsyncSnapshot<List<ProductAdsModel>?> snapshot) {
+              if (!snapshot.hasData) {
+                return const SizedBox();
+              } else {
+                return SizedBox(
+                  child: PageView.builder(
+                      controller: _pageController,
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return Image.network(snapshot.data![index].urlImage,
+                            filterQuality: FilterQuality.medium, scale: 0.1, fit: BoxFit.cover);
+                      }),
+                );
+              }
+            }));
   }
 
   /// buildCategoryWidget
@@ -136,14 +147,47 @@ class HomeScreenState extends State<HomeScreenMainUI> {
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: SizedBox(
-              width: double.infinity,
-              child: ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _lstGroupProduct.length,
-                  itemBuilder: (context, index) {
-                    return HomeProductGroupListTitle(model: _lstGroupProduct[index]);
-                  }),
-            ));
+                width: double.infinity,
+                child: FutureBuilder(
+                    future: _lstGroupProduct,
+                    builder: (context, AsyncSnapshot<List<ProductGroupModel>?> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const SizedBox();
+                      } else {
+                        return SizedBox(
+                          child: ListView.builder(
+                              physics: const ClampingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return HomeProductGroupListTitle(model: snapshot.data![index]);
+                              }),
+                        );
+                      }
+                    })));
+  }
+
+  void initializeView() {
+    // Handle State of PageView ads
+    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (_currentPage == _lstPageView.length - 1) {
+        _currentPage = 0;
+      } else {
+        _currentPage++;
+      }
+      _pageController.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeIn,
+      );
+    });
+  }
+
+  void initializeData() {
+    setState(() {
+      _lstAds = ProductAdsResponse().fetchData();
+      _lstCategory = ProductCategoriesResponse().fetchData();
+      _lstGroupProduct = ProductGroupsResponse().fetchData();
+    });
   }
 }

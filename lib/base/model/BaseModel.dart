@@ -8,19 +8,14 @@ class BaseModel {
   BaseModel.withAllParams(this.id);
 
   /// Function to implement dummy data when API not implemented yet
-  List<dynamic> createDummyData() {
-    return [];
-  }
+  List<dynamic> createDummyData() => [];
 
   /// Function parse object to Json
-  Map<String, dynamic> toJson() {
-    return {
-      "id": id,
-    };
-  }
+  Map<String, dynamic> toJson() => {"id": id};
 
   /// Function parse Json to object
-  factory BaseModel.fromJson(Map<String, dynamic> json){
-    return BaseModel();
-  }
+  BaseModel.fromJson(Map<String, dynamic> json);
+
+  /// Static Function to parse Json T class
+  static fromJsonModel(Map<String, dynamic> json) => BaseModel.fromJson(json);
 }

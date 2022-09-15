@@ -55,7 +55,7 @@ class HomeProductGroupListTitle extends StatelessWidget {
                     ))
               ],
             ),
-            Container(
+            SizedBox(
               height: childListHeight,
               child: ListView.builder(
                   itemCount: model.childList.length,
@@ -102,12 +102,13 @@ class HomeProductChildListTitle extends StatelessWidget {
                     model.urlImage,
                     width: imgSize,
                     height: imgSize,
+                    filterQuality: FilterQuality.medium,
                     fit: BoxFit.cover,
                     scale: 0.5,
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(0, ResourceDimens.padding_10, 0, 0),
+                SizedBox(
+                    height: ResourceDimens.view_height_40,
                     child: Text(
                       model.name,
                       maxLines: 2,
@@ -115,15 +116,14 @@ class HomeProductChildListTitle extends StatelessWidget {
                       style: const TextStyle(fontSize: ResourceDimens.text_size_12, fontWeight: FontWeight.bold),
                     )),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(ResourceDimens.margin_0, ResourceDimens.margin_10,
-                        ResourceDimens.margin_0, ResourceDimens.margin_5),
+                    padding: const EdgeInsets.fromLTRB(0, ResourceDimens.padding_5, 0, ResourceDimens.padding_5),
                     child: Text(
                       maxLines: 1,
                       ResourceStrings.home_screen_lowest_ask,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          height: 2,
+                          height: 1,
                           fontSize: ResourceDimens.text_size_12,
                           color: hexToColor(ResourceColors.color_text_gray_2)),
                     )),

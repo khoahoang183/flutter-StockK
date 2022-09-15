@@ -1,27 +1,21 @@
-import 'dart:convert';
-import 'dart:io';
+// ignore: file_names
+import 'package:stockk_flutter/model/ProductCategoryModel.dart';
+import 'package:stockk_flutter/model/ProductModel.dart';
 
-import 'package:http/http.dart';
-import 'package:stockk_flutter/base/model/BaseModel.dart';
-
-class BaseResponseModel<T> {
+abstract class BaseResponseModel<T> {
   late T result;
   late int status; // default is 200
   late String message;
 
   BaseResponseModel();
 
-  BaseResponseModel.withAllParams(this.status, this.message);
+  BaseResponseModel.withAllParams(this.result, this.status, this.message);
 
   Map<String, dynamic> toJson() {
     return {"result": result, "status": status, "message": message};
   }
 
-  BaseResponseModel fromJson(Map<String, dynamic> json) {
-    //List lst = (json["result"] as List).map((item) => BaseModel.fromJson(item)).toList();
-    return BaseResponseModel.withAllParams(
-      json["status"],
-      json["message"],
-    );
-  }
+  BaseResponseModel fromJson(Map<String, dynamic> json);
+
+  Future<T?> fetchData({String url});
 }
