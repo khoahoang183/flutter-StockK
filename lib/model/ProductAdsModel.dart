@@ -4,7 +4,7 @@ import 'dart:core';
 import 'package:stockk_flutter/base/model/BaseModel.dart';
 
 class ProductAdsModel extends BaseModel {
-  String name = "";
+  String title = "";
   String urlImage = "";
   String urlDetail = "";
 
@@ -12,7 +12,7 @@ class ProductAdsModel extends BaseModel {
   ProductAdsModel() : super();
 
   @override
-  ProductAdsModel.withAllParams(int id, this.name, this.urlImage, this.urlDetail) : super.withAllParams(id);
+  ProductAdsModel.withAllParams(int id, this.title, this.urlImage, this.urlDetail) : super.withAllParams(id);
 
   @override
   List<ProductAdsModel> createDummyData() {
@@ -27,7 +27,7 @@ class ProductAdsModel extends BaseModel {
   @override
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll({
-      "name": name,
+      "title": title,
       "urlImage": urlImage,
       "urlDetail": urlDetail,
     });
@@ -36,7 +36,7 @@ class ProductAdsModel extends BaseModel {
   factory ProductAdsModel.fromJson(Map<String, dynamic> json) {
     return ProductAdsModel.withAllParams(
         json["id"],
-        json["name"],
+        json["title"],
         json["urlImage"],
         json["urlDetail"]);
   }

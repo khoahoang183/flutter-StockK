@@ -14,7 +14,7 @@ class HomeSearchProductListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(
-          ResourceDimens.margin_0, ResourceDimens.margin_5, ResourceDimens.margin_10, ResourceDimens.margin_5),
+          ResourceDimens.dimen_0, ResourceDimens.dimen_5, ResourceDimens.dimen_10, ResourceDimens.dimen_5),
       decoration: BoxDecoration(
           color: hexToColor(ResourceColors.color_white),
           borderRadius: BorderRadius.circular(5),
@@ -24,7 +24,7 @@ class HomeSearchProductListTitle extends StatelessWidget {
           ],
           border: Border.all(color: hexToColor(ResourceColors.color_text_gray_11))),
       child: Container(
-          margin: const EdgeInsets.all(ResourceDimens.margin_5),
+          margin: const EdgeInsets.all(ResourceDimens.dimen_5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,8 +40,8 @@ class HomeSearchProductListTitle extends StatelessWidget {
                 ),
               )),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(ResourceDimens.padding_0, ResourceDimens.padding_10,
-                      ResourceDimens.padding_0, ResourceDimens.padding_0),
+                  padding: const EdgeInsets.fromLTRB(ResourceDimens.dimen_0, ResourceDimens.dimen_10,
+                      ResourceDimens.dimen_0, ResourceDimens.dimen_0),
                   child: Text(
                     model.name,
                     maxLines: 1,
@@ -49,8 +49,8 @@ class HomeSearchProductListTitle extends StatelessWidget {
                     style: const TextStyle(fontSize: ResourceDimens.text_size_12, fontWeight: FontWeight.bold),
                   )),
               Padding(
-                  padding: const EdgeInsets.fromLTRB(ResourceDimens.padding_0, ResourceDimens.padding_5,
-                      ResourceDimens.padding_0, ResourceDimens.padding_5),
+                  padding: const EdgeInsets.fromLTRB(ResourceDimens.dimen_0, ResourceDimens.dimen_5,
+                      ResourceDimens.dimen_0, ResourceDimens.dimen_5),
                   child: Text(
                     maxLines: 1,
                     ResourceStrings.home_screen_lowest_ask,

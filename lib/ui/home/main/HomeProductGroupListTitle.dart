@@ -17,55 +17,86 @@ class HomeProductGroupListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 120,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-                        model.groupTitle,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: ResourceDimens.text_size_16, fontWeight: FontWeight.bold),
-                      )),
-                ),
-                SizedBox(
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        ResourceStrings.home_screen_see_more,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: ResourceDimens.text_size_12,
-                            fontWeight: FontWeight.bold,
-                            color: hexToColor(ResourceColors.color_green_main)),
-                      )),
-                ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: Image.asset(
-                      width: 18,
-                      height: 18,
-                      "${ResourceImages.AssetsPrefix}icon_arrow.png",
-                      fit: BoxFit.cover,
-                      color: hexToColor(ResourceColors.color_green_main),
-                      scale: 0.1,
-                    ))
-              ],
-            ),
-            SizedBox(
+      child: buildChildWidget(),
+    );
+  }
+
+  Widget buildChildWidget() {
+    switch (model.viewCategory) {
+      case 1: // List Product
+        return Column(children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Text(
+                      model.groupTitle,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: ResourceDimens.text_size_16, fontWeight: FontWeight.bold),
+                    )),
+              ),
+              SizedBox(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      ResourceStrings.home_screen_see_more,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: ResourceDimens.text_size_12,
+                          fontWeight: FontWeight.bold,
+                          color: hexToColor(ResourceColors.color_green_main)),
+                    )),
+              ),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                  child: Image.asset(
+                    width: 18,
+                    height: 18,
+                    "${ResourceImages.AssetsPrefix}icon_arrow.png",
+                    fit: BoxFit.cover,
+                    color: hexToColor(ResourceColors.color_green_main),
+                    scale: 0.1,
+                  ))
+            ],
+          ),
+          SizedBox(
               height: childListHeight,
               child: ListView.builder(
                   itemCount: model.childList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return HomeProductChildListTitle(model: model.childList[index]);
-                  }),
-            )
-          ],
-        ));
+                  }))
+        ]);
+      case 2:
+        return Column(children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Text(
+                      model.groupTitle,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: ResourceDimens.text_size_16, fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ],
+          ),
+          SizedBox(
+              height: childListHeight / 3,
+              child: ListView.builder(
+                  itemCount: model.childList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Image.network(model.childList[0].urlImage,
+                        filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover);
+                  }))
+        ]);
+      default: // Ads Image
+        return SizedBox(height: childListHeight, child: HomeProductChildAdsTitle(model: model.childList[0]));
+    }
   }
 }
 
@@ -92,7 +123,7 @@ class HomeProductChildListTitle extends StatelessWidget {
             border: Border.all(color: hexToColor(ResourceColors.color_text_gray_11))),
         child: Container(
             width: imgSize,
-            margin: const EdgeInsets.symmetric(horizontal: ResourceDimens.margin_5, vertical: ResourceDimens.margin_15),
+            margin: const EdgeInsets.symmetric(horizontal: ResourceDimens.dimen_5, vertical: ResourceDimens.dimen_15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -116,7 +147,7 @@ class HomeProductChildListTitle extends StatelessWidget {
                       style: const TextStyle(fontSize: ResourceDimens.text_size_12, fontWeight: FontWeight.bold),
                     )),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(0, ResourceDimens.padding_5, 0, ResourceDimens.padding_5),
+                    padding: const EdgeInsets.fromLTRB(0, ResourceDimens.dimen_5, 0, ResourceDimens.dimen_5),
                     child: Text(
                       maxLines: 1,
                       ResourceStrings.home_screen_lowest_ask,
@@ -146,6 +177,23 @@ class HomeProductChildListTitle extends StatelessWidget {
                     ))
               ],
             )),
+      ),
+    );
+  }
+}
+
+class HomeProductChildAdsTitle extends StatelessWidget {
+  final ProductModel model;
+
+  // ignore: use_key_in_widget_constructors
+  const HomeProductChildAdsTitle({Key? key, required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
+        child: Image.network(model.urlImage, filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover),
       ),
     );
   }

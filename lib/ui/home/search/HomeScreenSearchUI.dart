@@ -50,7 +50,7 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-              padding: const EdgeInsets.all(ResourceDimens.padding_20),
+              padding: const EdgeInsets.all(ResourceDimens.dimen_20),
               child: Image.asset(
                   width: ResourceDimens.view_height_20,
                   height: ResourceDimens.view_height_20,
@@ -64,7 +64,7 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
           GestureDetector(
             onTap: onTapImageSearch,
             child: Padding(
-                padding: const EdgeInsets.all(ResourceDimens.padding_20),
+                padding: const EdgeInsets.all(ResourceDimens.dimen_20),
                 child: Image.asset(
                     width: ResourceDimens.view_height_20,
                     height: ResourceDimens.view_height_20,
@@ -80,7 +80,7 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
     return Expanded(
       child: Padding(
           padding: const EdgeInsets.fromLTRB(
-              ResourceDimens.padding_5, ResourceDimens.padding_10, ResourceDimens.padding_5, ResourceDimens.padding_0),
+              ResourceDimens.dimen_5, ResourceDimens.dimen_10, ResourceDimens.dimen_5, ResourceDimens.dimen_0),
           child: SysRefreshIndicator(
             onRefresh: onRefreshIndicator,
             child: ListView(

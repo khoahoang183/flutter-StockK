@@ -92,7 +92,7 @@ class HomeScreenState extends State<HomeScreenMainUI> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return Image.network(snapshot.data![index].urlImage,
-                            filterQuality: FilterQuality.medium, scale: 0.1, fit: BoxFit.cover);
+                            filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover);
                       }),
                 );
               }

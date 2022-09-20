@@ -48,7 +48,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
   /// buildLoginWidget
   Widget buildLoginWidget() {
     return Container(
-      margin: const EdgeInsets.all(ResourceDimens.margin_20),
+      margin: const EdgeInsets.all(ResourceDimens.dimen_20),
       alignment: Alignment.center,
       child:
           Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -57,14 +57,14 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
             height: ResourceDimens.view_height_120,
             "${ResourceImages.AssetsPrefix}img_logo_2.png"),
         const Padding(
-          padding: EdgeInsets.symmetric(vertical: ResourceDimens.padding_20),
+          padding: EdgeInsets.symmetric(vertical: ResourceDimens.dimen_20),
           child: Text(textAlign: TextAlign.center, ResourceStrings.home_screen_user_login_note),
         ),
         Container(
             width: double.infinity,
             color: hexToColor(ResourceColors.color_text_gray_3),
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_15),
-            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.margin_5),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
+            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
             child: Text(
               ResourceStrings.home_screen_user_signup,
               textAlign: TextAlign.center,
@@ -76,8 +76,8 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
         Container(
             width: double.infinity,
             decoration: BoxDecoration(border: Border.all(color: hexToColor(ResourceColors.color_text_gray_3))),
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_15),
-            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.margin_5),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
+            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
             child: Text(
               ResourceStrings.home_screen_user_login,
               textAlign: TextAlign.center,
@@ -97,7 +97,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
     return Column(
       children: [
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_10),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
             child: Text(
                 textAlign: TextAlign.center,
                 ResourceStrings.home_screen_user_blog,
@@ -106,7 +106,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
                     fontWeight: FontWeight.bold,
                     color: hexToColor(ResourceColors.color_text_gray_2)))),
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_10),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
             child: Text(
                 textAlign: TextAlign.center,
                 ResourceStrings.home_screen_user_help,
@@ -115,7 +115,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
                     fontWeight: FontWeight.bold,
                     color: hexToColor(ResourceColors.color_text_gray_2)))),
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_10),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
             child: Text(
                 textAlign: TextAlign.center,
                 ResourceStrings.home_screen_user_how_it_works,
@@ -124,7 +124,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
                     fontWeight: FontWeight.bold,
                     color: hexToColor(ResourceColors.color_text_gray_2)))),
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_10),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
             child: Text(
                 textAlign: TextAlign.center,
                 ResourceStrings.home_screen_user_reviews,
@@ -133,7 +133,7 @@ class HomeScreenUserState extends State<HomeScreenUserUI> {
                     fontWeight: FontWeight.bold,
                     color: hexToColor(ResourceColors.color_text_gray_2)))),
         Padding(
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.padding_10),
+            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
             child: Text(
                 textAlign: TextAlign.center,
                 ResourceStrings.home_screen_user_currency,

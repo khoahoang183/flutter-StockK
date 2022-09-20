@@ -43,7 +43,7 @@ class _CusTopBarState extends State<CusTopBarWidget> {
           width: double.infinity,
           height: ResourceDimens.view_toolbar_height,
           child: Padding(
-            padding: const EdgeInsets.all(ResourceDimens.padding_20),
+            padding: const EdgeInsets.all(ResourceDimens.dimen_20),
             child: Row(
               children: [
                 buildLeftImageWidget(),

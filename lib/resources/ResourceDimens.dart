@@ -10,18 +10,12 @@ class ResourceDimens {
   static const double text_size_22 = 22;
 
   /// Element Size
-  static const double margin_0 = 0;
-  static const double margin_5 = 5;
-  static const double margin_10 = 10;
-  static const double margin_15 = 15;
-  static const double margin_20 = 20;
-
-  static const double padding_0 = 0;
-  static const double padding_5 = 5;
-  static const double padding_10 = 10;
-  static const double padding_15 = 15;
-  static const double padding_20 = 20;
-  static const double padding_40 = 40;
+  static const double dimen_0 = 0;
+  static const double dimen_5 = 5;
+  static const double dimen_10 = 10;
+  static const double dimen_15 = 15;
+  static const double dimen_20 = 20;
+  static const double dimen_40 = 40;
 
   /// View Size
   static const double view_toolbar_height = 70;
