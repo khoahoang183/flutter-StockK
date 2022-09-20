@@ -9,7 +9,9 @@ import '../../../resources/ResourceImage.dart';
 
 class HomeProductGroupListTitle extends StatelessWidget {
   final ProductGroupModel model;
-  final double childListHeight = 270;
+  final double childListItemHeight = 270;
+  final double childListImageHeight = 100;
+  final double childListAdsHeight = 250;
 
   // ignore: use_key_in_widget_constructors
   const HomeProductGroupListTitle({Key? key, required this.model});
@@ -61,7 +63,7 @@ class HomeProductGroupListTitle extends StatelessWidget {
             ],
           ),
           SizedBox(
-              height: childListHeight,
+              height: childListItemHeight,
               child: ListView.builder(
                   itemCount: model.childList.length,
                   scrollDirection: Axis.horizontal,
@@ -75,7 +77,7 @@ class HomeProductGroupListTitle extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
                     child: Text(
                       model.groupTitle,
                       overflow: TextOverflow.ellipsis,
@@ -85,17 +87,18 @@ class HomeProductGroupListTitle extends StatelessWidget {
             ],
           ),
           SizedBox(
-              height: childListHeight / 3,
+              height: childListImageHeight,
               child: ListView.builder(
                   itemCount: model.childList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return Image.network(model.childList[0].urlImage,
-                        filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover);
+                    return HomeProductChildImageListTitle(model: model.childList[index]);
                   }))
         ]);
-      default: // Ads Image
-        return SizedBox(height: childListHeight, child: HomeProductChildAdsTitle(model: model.childList[0]));
+      case 3: // Ads Image
+        return SizedBox(height: childListItemHeight, child: HomeProductChildAdsTitle(model: model.childList[0]));
+      default:
+        return const SizedBox.shrink();
     }
   }
 }
@@ -177,6 +180,24 @@ class HomeProductChildListTitle extends StatelessWidget {
                     ))
               ],
             )),
+      ),
+    );
+  }
+}
+
+class HomeProductChildImageListTitle extends StatelessWidget {
+  final ProductModel model;
+
+  // ignore: use_key_in_widget_constructors
+  const HomeProductChildImageListTitle({Key? key, required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(
+            ResourceDimens.dimen_0, ResourceDimens.dimen_0, ResourceDimens.dimen_5, ResourceDimens.dimen_0),
+        child: Image.network(model.urlImage, filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover),
       ),
     );
   }

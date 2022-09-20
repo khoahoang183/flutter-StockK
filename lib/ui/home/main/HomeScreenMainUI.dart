@@ -23,13 +23,13 @@ class HomeScreenMainUI extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return HomeScreenState();
+    return HomeScreenMainState();
   }
 }
 
 // State HomeScreenState
-class HomeScreenState extends State<HomeScreenMainUI> {
-  HomeScreenState();
+class HomeScreenMainState extends State<HomeScreenMainUI> {
+  HomeScreenMainState();
 
   int _currentPage = 0;
   final PageController _pageController = PageController(initialPage: 0);
@@ -42,7 +42,6 @@ class HomeScreenState extends State<HomeScreenMainUI> {
   late Future<List<ProductAdsModel>> _lstAds;
   late Future<List<ProductCategoryModel>> _lstCategory;
   late Future<List<ProductGroupModel>> _lstGroupProduct;
-  late String _title;
 
   @override
   void initState() {
@@ -184,10 +183,8 @@ class HomeScreenState extends State<HomeScreenMainUI> {
   }
 
   void initializeData() {
-    setState(() {
-      _lstAds = ProductAdsResponse().fetchData();
-      _lstCategory = ProductCategoriesResponse().fetchData();
-      _lstGroupProduct = ProductGroupsResponse().fetchData();
-    });
+    _lstAds = ProductAdsResponse().fetchData();
+    _lstCategory = ProductCategoriesResponse().fetchData();
+    _lstGroupProduct = ProductGroupsResponse().fetchData();
   }
 }

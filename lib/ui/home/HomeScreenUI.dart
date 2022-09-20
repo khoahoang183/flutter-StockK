@@ -95,12 +95,7 @@ class HomeScreenState extends State<HomeScreenUI> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          // disable back
-          if (Navigator.of(context).userGestureInProgress) {
-            return false;
-          } else {
-            return true;
-          }
+          return false; // disable back press
         },
         child: Scaffold(
           appBar: SysAppBar(),

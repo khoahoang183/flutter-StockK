@@ -7,6 +7,7 @@ import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/util/view/system/SysRefreshIndicator.dart';
 
+import '../../../network/response/ProductSearchResponse.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../util/view/custom/CusDividerLine.dart';
 import 'HomeSearchProductListTitle.dart';
@@ -25,7 +26,7 @@ class HomeScreenSearchUI extends StatefulWidget {
 class HomeScreenSearchState extends State<HomeScreenSearchUI> {
   HomeScreenSearchState();
 
-  List<ProductModel> _lstProductSearch = <ProductModel>[];
+  late Future<List<ProductModel>> _lstProductSearch = Future(() => []);
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,8 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
           const Expanded(
             child: TextField(
                 decoration: InputDecoration.collapsed(
-              hintText: ResourceStrings.home_screen_search_hint,
-            )),
+                  hintText: ResourceStrings.home_screen_search_hint,
+                )),
           ),
           GestureDetector(
             onTap: onTapImageSearch,
@@ -85,15 +86,24 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
             onRefresh: onRefreshIndicator,
             child: ListView(
               children: <Widget>[
-                GridView.count(
-                  crossAxisCount: 2,
-                  physics: const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-                  shrinkWrap: true, // You won't see infinite size error
-                  children: List.generate(
-                    _lstProductSearch.length,
-                    (index) => HomeSearchProductListTitle(model: _lstProductSearch[index]),
-                  ),
-                )
+                FutureBuilder(
+                    future: _lstProductSearch,
+                    builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const SizedBox(height: 120);
+                      } else {
+                        return GridView.count(
+                          crossAxisCount: 2,
+                          physics: const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                          shrinkWrap: true, // You won't see infinite size error
+                          children: List.generate(
+                            snapshot.data!.length,
+                                (index) => HomeSearchProductListTitle(model: snapshot.data![index]),
+                          ),
+                        );
+                      }
+                    })
+
               ],
             ),
           )),
@@ -103,16 +113,14 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
   /// onTapImageSearch
   void onTapImageSearch() {
     setState(() {
-      _lstProductSearch = ProductModel().createDummyData();
-
-      String json = jsonEncode(_lstProductSearch.map((e) => e.toJson()).toList());
+      _lstProductSearch = ProductSearchResponse().fetchData();
     });
   }
 
   /// onRefreshIndicator
   Future<void> onRefreshIndicator() async {
     setState(() {
-      _lstProductSearch.clear();
+      _lstProductSearch = Future(() => []);
     });
   }
 }

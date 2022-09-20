@@ -33,7 +33,7 @@ class HomeSearchProductListTitle extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
                   model.urlImage,
-                  width: ResourceDimens.view_height_100,
+                  width: double.infinity   ,
                   height: ResourceDimens.view_height_100,
                   fit: BoxFit.cover,
                   scale: 0.5,
