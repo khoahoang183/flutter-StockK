@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
+import 'package:stockk_flutter/resources/ResourceDimens.dart';
+
+import '../../../util/view/custom/CusImage.dart';
 
 class HomeCategoryListTitle extends StatelessWidget {
   final ProductCategoryModel model;
@@ -10,18 +13,14 @@ class HomeCategoryListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
-      width: 120,
-      child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 5, 20, 5),
+        height: ResourceDimens.view_height_120,
+        width: ResourceDimens.view_height_120,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+              ResourceDimens.dimen_0, ResourceDimens.dimen_5, ResourceDimens.dimen_10, ResourceDimens.dimen_5),
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                model.urlImage,
-                filterQuality: FilterQuality.medium,
-                fit: BoxFit.cover,
-                scale: 0.1,
-              ))),
-    );
+              borderRadius: BorderRadius.circular(ResourceDimens.dimen_10),
+              child: buildCusImageNetwork(model.urlImage)),
+        ));
   }
 }

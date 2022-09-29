@@ -28,7 +28,7 @@ class HomeScreenMainUI extends StatefulWidget {
 }
 
 // State HomeScreenState
-class HomeScreenMainState extends State<HomeScreenMainUI> {
+class HomeScreenMainState extends State<HomeScreenMainUI> with AutomaticKeepAliveClientMixin {
   HomeScreenMainState();
 
   int _currentPage = 0;
@@ -53,7 +53,11 @@ class HomeScreenMainState extends State<HomeScreenMainUI> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: SysAppBar(),
         body: SysRefreshIndicator(

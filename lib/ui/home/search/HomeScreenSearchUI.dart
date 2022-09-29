@@ -1,15 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/model/ProductModel.dart';
-import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/resources/ResourceStrings.dart';
 import 'package:stockk_flutter/util/view/system/SysRefreshIndicator.dart';
 
-import '../../../network/response/ProductSearchResponse.dart';
 import '../../../resources/ResourceImage.dart';
 import '../../../util/view/custom/CusDividerLine.dart';
+import '../../../viewmodel/home/HomeScreenSearchViewModel.dart';
 import 'HomeSearchProductListTitle.dart';
 
 /// UI StatefulWidget
@@ -23,21 +20,23 @@ class HomeScreenSearchUI extends StatefulWidget {
 }
 
 /// State HomeScreenState
-class HomeScreenSearchState extends State<HomeScreenSearchUI> {
+class HomeScreenSearchState extends State<HomeScreenSearchUI> with AutomaticKeepAliveClientMixin {
   HomeScreenSearchState();
 
   late Future<List<ProductModel>> _lstProductSearch = Future(() => []);
 
+  late HomeScreenSearchViewModel viewModel = HomeScreenSearchViewModel(context);
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
         color: Colors.white,
         child: Column(
-          children: [
-            buildSearchWidget(),
-            CusDividerLine(),
-            buildListGridSearch()
-          ],
+          children: [buildSearchWidget(), CusDividerLine(), buildListGridSearch()],
         ));
   }
 
@@ -90,7 +89,7 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
                     future: _lstProductSearch,
                     builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
                       if (!snapshot.hasData) {
-                        return const SizedBox(height: 120);
+                        return const SizedBox(height: ResourceDimens.dimen_0);
                       } else {
                         return GridView.count(
                           crossAxisCount: 2,
@@ -103,7 +102,6 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
                         );
                       }
                     })
-
               ],
             ),
           )),
@@ -113,7 +111,7 @@ class HomeScreenSearchState extends State<HomeScreenSearchUI> {
   /// onTapImageSearch
   void onTapImageSearch() {
     setState(() {
-      _lstProductSearch = ProductSearchResponse().fetchData();
+      _lstProductSearch = viewModel.fetchProductSearch();
     });
   }
 

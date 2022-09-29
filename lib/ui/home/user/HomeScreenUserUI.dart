@@ -19,11 +19,15 @@ class HomeScreenUserUI extends StatefulWidget {
 }
 
 // State HomeScreenState
-class HomeScreenUserState extends State<HomeScreenUserUI> {
+class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliveClientMixin {
   HomeScreenUserState();
 
   @override
+  bool get wantKeepAlive => false;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
         color: Colors.white,
         child: Column(

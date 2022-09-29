@@ -6,6 +6,7 @@ import 'package:stockk_flutter/resources/ResourceStrings.dart';
 
 import '../../../resources/ResourceDimens.dart';
 import '../../../resources/ResourceImage.dart';
+import '../../../util/view/custom/CusBoxDecoration.dart';
 
 class HomeProductGroupListTitle extends StatelessWidget {
   final ProductGroupModel model;
@@ -96,7 +97,7 @@ class HomeProductGroupListTitle extends StatelessWidget {
                   }))
         ]);
       case 3: // Ads Image
-        return SizedBox(height: childListItemHeight, child: HomeProductChildAdsTitle(model: model.childList[0]));
+        return Wrap(children: [HomeProductChildAdsTitle(model: model.childList[0])]);
       default:
         return const SizedBox.shrink();
     }
@@ -114,16 +115,9 @@ class HomeProductChildListTitle extends StatelessWidget {
     double imgSize = 100;
     return Center(
       child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 5, 10, 5),
-        decoration: BoxDecoration(
-            color: hexToColor(ResourceColors.color_white),
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.2), spreadRadius: 1, blurRadius: 2 // changes position of shadow
-                  ),
-            ],
-            border: Border.all(color: hexToColor(ResourceColors.color_text_gray_11))),
+        margin: const EdgeInsets.fromLTRB(
+            ResourceDimens.dimen_5, ResourceDimens.dimen_5, ResourceDimens.dimen_10, ResourceDimens.dimen_5),
+        decoration: buildCusBoxDecorationShadow(),
         child: Container(
             width: imgSize,
             margin: const EdgeInsets.symmetric(horizontal: ResourceDimens.dimen_5, vertical: ResourceDimens.dimen_15),
@@ -131,7 +125,7 @@ class HomeProductChildListTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(ResourceDimens.dimen_10),
                   child: Image.network(
                     model.urlImage,
                     width: imgSize,
@@ -171,7 +165,7 @@ class HomeProductChildListTitle extends StatelessWidget {
                     )),
                 Container(
                     color: hexToColor(ResourceColors.color_text_gray_10),
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(ResourceDimens.dimen_5),
                     child: Text(
                       "${model.soldCount} SOLD",
                       maxLines: 1,
@@ -195,8 +189,7 @@ class HomeProductChildImageListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: const EdgeInsets.fromLTRB(
-            ResourceDimens.dimen_0, ResourceDimens.dimen_0, ResourceDimens.dimen_5, ResourceDimens.dimen_0),
+        padding: const EdgeInsets.all(ResourceDimens.dimen_5),
         child: Image.network(model.urlImage, filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover),
       ),
     );
@@ -213,7 +206,7 @@ class HomeProductChildAdsTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
+        margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_10),
         child: Image.network(model.urlImage, filterQuality: FilterQuality.low, scale: 0.1, fit: BoxFit.cover),
       ),
     );

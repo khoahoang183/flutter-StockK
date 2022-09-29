@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stockk_flutter/resources/ResourceDimens.dart';
 
 import '../../resources/ResourceColors.dart';
 import '../../resources/ResourceImage.dart';
@@ -43,9 +44,7 @@ class SplashScreenState extends State<SplashScreenUI> {
               InkWell(
                   onTap: Event_onTap_imgLogo,
                   child: Image.asset("${ResourceImages.AssetsPrefix}img_logo_gray.png",
-                    width: 120,
-                    height: 120,)
-              ),
+                      width: ResourceDimens.view_height_100, height: ResourceDimens.view_height_100)),
             ],
           )),
     );

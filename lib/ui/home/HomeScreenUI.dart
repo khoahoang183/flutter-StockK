@@ -24,67 +24,8 @@ class HomeScreenUI extends StatefulWidget {
 class HomeScreenState extends State<HomeScreenUI> {
   HomeScreenState();
 
+  final _pageController = PageController();
   int _currentSelectedIndex = 0;
-  static const List<Widget> _lstPageUI = <Widget>[
-    HomeScreenMainUI(),
-    HomeScreenSearchUI(),
-    HomeScreenNotiUI(),
-    HomeScreenUserUI(),
-  ];
-
-  static final List<BottomNavigationBarItem> _lstBottomNavigationBarItem = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_increase.png",
-          color: hexToColor(ResourceColors.color_text_gray_6)),
-      activeIcon: Image.asset(
-        width: ResourceDimens.view_height_20,
-        height: ResourceDimens.view_height_20,
-        "${ResourceImages.AssetsPrefix}icon_home_increase.png",
-        color: hexToColor(ResourceColors.color_green_main),
-      ),
-      label: ResourceStrings.home_screen_navigate_home,
-    ),
-    BottomNavigationBarItem(
-      icon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_search.png"),
-      activeIcon: Image.asset(
-        width: ResourceDimens.view_height_20,
-        height: ResourceDimens.view_height_20,
-        "${ResourceImages.AssetsPrefix}icon_home_search.png",
-        color: hexToColor(ResourceColors.color_green_main),
-      ),
-      label: ResourceStrings.home_screen_navigate_search,
-    ),
-    BottomNavigationBarItem(
-      icon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_noti.png"),
-      activeIcon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_noti.png",
-          color: hexToColor(ResourceColors.color_green_main)),
-      label: ResourceStrings.home_screen_navigate_noti,
-    ),
-    BottomNavigationBarItem(
-      icon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_user.png"),
-      activeIcon: Image.asset(
-          width: ResourceDimens.view_height_20,
-          height: ResourceDimens.view_height_20,
-          "${ResourceImages.AssetsPrefix}icon_home_user.png",
-          color: hexToColor(ResourceColors.color_green_main)),
-      label: ResourceStrings.home_screen_navigate_user,
-    )
-  ];
 
   @override
   void initState() {
@@ -100,8 +41,16 @@ class HomeScreenState extends State<HomeScreenUI> {
         child: Scaffold(
           appBar: SysAppBar(),
           body: Center(
-            child: _lstPageUI.elementAt(_currentSelectedIndex),
-          ),
+              //child: _lstPageUI.elementAt(_currentSelectedIndex),
+              child: PageView(
+                  physics: const NeverScrollableScrollPhysics(), // disable horizontal scroll of user
+                  controller: _pageController,
+                  children: const <Widget>[
+                HomeScreenMainUI(),
+                HomeScreenSearchUI(),
+                HomeScreenNotiUI(),
+                HomeScreenUserUI(),
+              ])),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentSelectedIndex,
             selectedItemColor: hexToColor(ResourceColors.color_green_main),
@@ -110,14 +59,37 @@ class HomeScreenState extends State<HomeScreenUI> {
             showUnselectedLabels: true,
             type: BottomNavigationBarType.fixed,
             onTap: _onTapBottomNavigationBar,
-            items: _lstBottomNavigationBarItem,
+            items: <BottomNavigationBarItem>[
+              buildBottomNavigationBarItem(
+                  "${ResourceImages.AssetsPrefix}icon_home_user.png", ResourceStrings.home_screen_navigate_user),
+              buildBottomNavigationBarItem(
+                  "${ResourceImages.AssetsPrefix}icon_home_search.png", ResourceStrings.home_screen_navigate_search),
+              buildBottomNavigationBarItem(
+                  "${ResourceImages.AssetsPrefix}icon_home_noti.png", ResourceStrings.home_screen_navigate_noti),
+              buildBottomNavigationBarItem(
+                  "${ResourceImages.AssetsPrefix}icon_home_user.png", ResourceStrings.home_screen_navigate_user)
+            ],
           ),
         ));
+  }
+
+  BottomNavigationBarItem buildBottomNavigationBarItem(String itemImageSrc, String itemLabelSrc) {
+    return BottomNavigationBarItem(
+      icon: Image.asset(width: ResourceDimens.view_height_20, height: ResourceDimens.view_height_20, itemImageSrc),
+      activeIcon: Image.asset(
+          width: ResourceDimens.view_height_20,
+          height: ResourceDimens.view_height_20,
+          itemImageSrc,
+          color: hexToColor(ResourceColors.color_green_main)),
+      label: itemLabelSrc,
+    );
   }
 
   void _onTapBottomNavigationBar(int index) {
     setState(() {
       _currentSelectedIndex = index;
+      _pageController.animateToPage(_currentSelectedIndex,
+          duration: const Duration(milliseconds: 400), curve: Curves.ease);
     });
   }
 }

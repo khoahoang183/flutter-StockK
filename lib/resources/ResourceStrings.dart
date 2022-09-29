@@ -25,4 +25,6 @@ class ResourceStrings {
   static const String home_screen_user_how_it_works = "How It Works";
   static const String home_screen_user_reviews = "Reviews";
   static const String home_screen_user_currency = "Currency: USD";
+
+  static const String home_screen_noti_title = "Message Center";
 }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:stockk_flutter/base/model/BaseResponseModel.dart';
 import 'package:stockk_flutter/model/ProductCategoryModel.dart';
-import 'package:stockk_flutter/util/helper/LogHelper.dart';
+import 'package:stockk_flutter/util/helper/log/LogHelper.dart';
 
 import '../../const/ApplicationConst.dart';
 import '../../const/NetworkConst.dart';
