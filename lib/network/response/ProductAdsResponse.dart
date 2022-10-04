@@ -9,9 +9,8 @@ import '../../const/ApplicationConst.dart';
 import '../../const/NetworkConst.dart';
 
 class ProductAdsResponse extends BaseResponseModel<List<ProductAdsModel>> {
-
   @override
-  ProductAdsResponse(): super();
+  ProductAdsResponse() : super();
 
   @override
   ProductAdsResponse.withAllParams(result, status, message) : super.withAllParams(result, status, message);
@@ -26,7 +25,8 @@ class ProductAdsResponse extends BaseResponseModel<List<ProductAdsModel>> {
   }
 
   @override
-  Future<List<ProductAdsModel>> fetchData({url = "$BASE_URL/productAds"}) async {
+  Future<List<ProductAdsModel>> fetchData(
+      {url = "$BASE_URL/productAds", paramsData = const {}, postData = const {}}) async {
     try {
       final httpResponse = await http.get(Uri.parse(url));
       if (httpResponse.statusCode == NETWORK_STATUS_SUCCESS) {

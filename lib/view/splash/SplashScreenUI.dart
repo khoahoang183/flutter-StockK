@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 
-
 import '../../resources/ResourceColors.dart';
 import '../../resources/ResourceImage.dart';
+import '../../util/helper/PreferenceHelper.dart';
 import '../home/HomeScreenUI.dart';
 
 /// UI StatefulWidget
@@ -24,10 +24,7 @@ class SplashScreenState extends State<SplashScreenUI> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 1), () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const HomeScreenUI()));
-    });
+    initializeData();
   }
 
   @override
@@ -53,8 +50,14 @@ class SplashScreenState extends State<SplashScreenUI> {
 
   // ignore: non_constant_identifier_names
   void Event_onTap_imgLogo() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomeScreenUI()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreenUI()));
+  }
+
+  void initializeData() async {
+    await PreferenceHelper.init();
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreenUI()));
+    });
   }
 }
 

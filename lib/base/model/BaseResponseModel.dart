@@ -1,7 +1,3 @@
-// ignore: file_names
-import 'package:stockk_flutter/model/ProductCategoryModel.dart';
-import 'package:stockk_flutter/model/ProductModel.dart';
-
 abstract class BaseResponseModel<T> {
   late T result;
   late int status; // default is 200
@@ -17,5 +13,5 @@ abstract class BaseResponseModel<T> {
 
   BaseResponseModel fromJson(Map<String, dynamic> json);
 
-  Future<T?> fetchData({String url});
+  Future<T?> fetchData({String url, Map<String, String> paramsData, Map<String, String> postData});
 }

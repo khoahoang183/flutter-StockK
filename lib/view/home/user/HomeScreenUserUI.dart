@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stockk_flutter/model/AuthModel.dart';
-import 'package:stockk_flutter/view/faq/FAQScreenUI.dart';
 import 'package:stockk_flutter/util/view/custom/CusDividerLine.dart';
 import 'package:stockk_flutter/util/view/custom/CusTopBarWidget.dart';
+import 'package:stockk_flutter/view/faq/FAQScreenUI.dart';
 import 'package:stockk_flutter/viewmodel/home/HomeScreenUserViewModel.dart';
 
 import '../../../resources/ResourceColors.dart';
@@ -26,13 +25,20 @@ class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliv
 
   HomeScreenUserState();
 
-  late final Future<AuthModel> authModel;
   @override
   bool get wantKeepAlive => false;
 
   @override
+  void initState() {
+    super.initState();
+
+    initializeData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return Container(
         color: Colors.white,
         child: Column(
@@ -56,52 +62,59 @@ class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliv
 
   /// buildLoginWidget
   Widget buildLoginWidget() {
-    return Container(
-      margin: const EdgeInsets.all(ResourceDimens.dimen_20),
-      alignment: Alignment.center,
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Image.asset(
-            width: ResourceDimens.view_height_120,
-            height: ResourceDimens.view_height_120,
-            "${ResourceImages.AssetsPrefix}img_logo_2.png"),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: ResourceDimens.dimen_20),
-          child: Text(textAlign: TextAlign.center, ResourceStrings.home_screen_user_login_note),
-        ),
-        Container(
-            width: double.infinity,
-            color: hexToColor(ResourceColors.color_text_gray_3),
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
-            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
-            child: Text(
-              ResourceStrings.home_screen_user_signup,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: ResourceDimens.text_size_12,
-                  fontWeight: FontWeight.bold,
-                  color: hexToColor(ResourceColors.color_white)),
-            )),
-        GestureDetector(
-          onTap: onTapButtonLogin,
-          child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(border: Border.all(color: hexToColor(ResourceColors.color_text_gray_3))),
-              padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
-              margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
-              child: Text(
-                ResourceStrings.home_screen_user_login,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: ResourceDimens.text_size_12,
-                    fontWeight: FontWeight.bold,
-                    color: hexToColor(ResourceColors.color_text_gray_3)),
-              )),
-        ),
-        CusDividerLine(),
-        buildOtherWidget()
-      ]),
-    );
+    if (viewModel.accessToken.isNotEmpty) {
+      return const Text("is logged");
+    } else {
+      return Container(
+        margin: const EdgeInsets.all(ResourceDimens.dimen_20),
+        alignment: Alignment.center,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                  width: ResourceDimens.view_height_120,
+                  height: ResourceDimens.view_height_120,
+                  "${ResourceImages.AssetsPrefix}img_logo_2.png"),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: ResourceDimens.dimen_20),
+                child: Text(textAlign: TextAlign.center, ResourceStrings.home_screen_user_login_note),
+              ),
+              Container(
+                  width: double.infinity,
+                  color: hexToColor(ResourceColors.color_text_gray_3),
+                  padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
+                  margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
+                  child: Text(
+                    ResourceStrings.home_screen_user_signup,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: ResourceDimens.text_size_12,
+                        fontWeight: FontWeight.bold,
+                        color: hexToColor(ResourceColors.color_white)),
+                  )),
+              GestureDetector(
+                onTap: onTapButtonLogin,
+                child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(border: Border.all(color: hexToColor(ResourceColors.color_text_gray_3))),
+                    padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
+                    margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
+                    child: Text(
+                      ResourceStrings.home_screen_user_login,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: ResourceDimens.text_size_12,
+                          fontWeight: FontWeight.bold,
+                          color: hexToColor(ResourceColors.color_text_gray_3)),
+                    )),
+              ),
+              CusDividerLine(),
+              buildOtherWidget()
+            ]),
+      );
+    }
+    ;
   }
 
   /// buildOtherWidget
@@ -165,7 +178,13 @@ class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliv
   /// onTapButtonLogin
   void onTapButtonLogin() {
     setState(() {
-      authModel = viewModel.fetchAuthModel();
+      viewModel.loginFunction("", "");
+    });
+  }
+
+  void initializeData() {
+    setState(() {
+      viewModel.getAccessToken();
     });
   }
 }
