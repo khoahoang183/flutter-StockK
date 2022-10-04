@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stockk_flutter/ui/faq/FAQScreenUI.dart';
+import 'package:stockk_flutter/model/AuthModel.dart';
+import 'package:stockk_flutter/view/faq/FAQScreenUI.dart';
 import 'package:stockk_flutter/util/view/custom/CusDividerLine.dart';
 import 'package:stockk_flutter/util/view/custom/CusTopBarWidget.dart';
+import 'package:stockk_flutter/viewmodel/home/HomeScreenUserViewModel.dart';
 
 import '../../../resources/ResourceColors.dart';
 import '../../../resources/ResourceDimens.dart';
@@ -20,8 +22,11 @@ class HomeScreenUserUI extends StatefulWidget {
 
 // State HomeScreenState
 class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliveClientMixin {
+  late HomeScreenUserViewModel viewModel = HomeScreenUserViewModel(context);
+
   HomeScreenUserState();
 
+  late final Future<AuthModel> authModel;
   @override
   bool get wantKeepAlive => false;
 
@@ -77,19 +82,22 @@ class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliv
                   fontWeight: FontWeight.bold,
                   color: hexToColor(ResourceColors.color_white)),
             )),
-        Container(
-            width: double.infinity,
-            decoration: BoxDecoration(border: Border.all(color: hexToColor(ResourceColors.color_text_gray_3))),
-            padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
-            margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
-            child: Text(
-              ResourceStrings.home_screen_user_login,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: ResourceDimens.text_size_12,
-                  fontWeight: FontWeight.bold,
-                  color: hexToColor(ResourceColors.color_text_gray_3)),
-            )),
+        GestureDetector(
+          onTap: onTapButtonLogin,
+          child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(border: Border.all(color: hexToColor(ResourceColors.color_text_gray_3))),
+              padding: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_15),
+              margin: const EdgeInsets.symmetric(vertical: ResourceDimens.dimen_5),
+              child: Text(
+                ResourceStrings.home_screen_user_login,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: ResourceDimens.text_size_12,
+                    fontWeight: FontWeight.bold,
+                    color: hexToColor(ResourceColors.color_text_gray_3)),
+              )),
+        ),
         CusDividerLine(),
         buildOtherWidget()
       ]),
@@ -152,5 +160,12 @@ class HomeScreenUserState extends State<HomeScreenUserUI> with AutomaticKeepAliv
   /// onTapImageFAQ
   void onTapImageFAQ() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const FAQScreenUI()));
+  }
+
+  /// onTapButtonLogin
+  void onTapButtonLogin() {
+    setState(() {
+      authModel = viewModel.fetchAuthModel();
+    });
   }
 }

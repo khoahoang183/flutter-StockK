@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
 import 'package:stockk_flutter/resources/ResourceStrings.dart';
-import 'package:stockk_flutter/ui/home/main/HomeScreenMainUI.dart';
-import 'package:stockk_flutter/ui/home/noti/HomeScreenNotiUI.dart';
-import 'package:stockk_flutter/ui/home/search/HomeScreenSearchUI.dart';
+import 'package:stockk_flutter/view/home/main/HomeScreenMainUI.dart';
+import 'package:stockk_flutter/view/home/noti/HomeScreenNotiUI.dart';
+import 'package:stockk_flutter/view/home/search/HomeScreenSearchUI.dart';
 
 import '../../resources/ResourceImage.dart';
 import '../../util/view/system/SysAppBar.dart';

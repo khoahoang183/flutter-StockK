@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../resources/ResourceThemes.dart';
-import '../ui/splash/SplashScreenUI.dart';
+import '../view/splash/SplashScreenUI.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

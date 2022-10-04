@@ -9,7 +9,7 @@ import 'package:stockk_flutter/network/response/ProductCategoriesResponse.dart';
 import 'package:stockk_flutter/network/response/ProductGroupModelsResponse.dart';
 import 'package:stockk_flutter/resources/ResourceColors.dart';
 import 'package:stockk_flutter/resources/ResourceDimens.dart';
-import 'package:stockk_flutter/ui/home/main/HomeProductGroupListTitle.dart';
+import 'package:stockk_flutter/view/home/main/HomeProductGroupListTitle.dart';
 
 import '../../../resources/ResourceImage.dart';
 import '../../../resources/ResourceStrings.dart';
